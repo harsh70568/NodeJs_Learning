@@ -1,0 +1,13 @@
+// import module
+const os = require('os');
+
+// os architecture -> 64Bit
+console.log(os.arch());
+
+// free memory
+const mem = os.freemem();
+console.log(`${mem / 1024 / 1024 / 1024}`);
+
+// total memory
+const tot = os.totalmem();
+console.log(`${tot / 1024 / 1024 / 1024}`);
