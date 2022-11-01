@@ -1,0 +1,18 @@
+// importing core module
+const fs = require('fs');
+
+// creating new file asynchronously.
+fs.writeFile("read.txt", "Welcome to my channel", (err) => {
+    console.log("Created");
+});
+
+// appending new data
+fs.appendFile("read.txt", "!",(err) => {
+    console.log("task completed");
+});
+
+//reading the data
+const buf_data = fs.readFile("read.txt","UTF-8", (err, data) =>{
+    console.log(data);
+})
+
