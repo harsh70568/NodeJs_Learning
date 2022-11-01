@@ -1,0 +1,50 @@
+// Challenge
+// 1. Create a folder and name it Harsh
+// 2. Create a file in it and name bio.txt and add data to it.
+// 3. Add more data into the file at the end of the existing data
+// 4. Read the data without buffer
+// 5. Rename the file to mybio.txt
+// 6. now delete both the file and the folder
+
+
+const fs = require("fs");
+
+// creating folder
+fs.mkdir("harsh",(err) => {
+    console.log("Created");
+});
+
+// Creating a file and adding data to it.
+fs.writeFile("harsh/bio.txt", "My name is Harsh Jain", (err) => {
+    console.log("Created");
+})
+
+// Adding more data to it.
+fs.appendFile("harsh/bio.txt", " I am pursuing B.Tech", (err) => {
+    console.log("Added");
+})
+
+// Reading the data
+fs.readFile("harsh/bio.txt", "UTF-8", (err, data) =>{
+    console.log(data);
+})
+
+// Rename the file
+fs.rename("harsh/bio.txt","harsh/mybio.txt" ,(err) =>{
+    console.log("Renamed");
+})
+
+// Deleting file
+fs.unlink("harsh/mybio.txt", (err) =>{
+    console.log("Deleted");
+})
+
+// Deleting folder
+fs.rmdir("harsh", (err) =>{
+    console.log("Deleted");
+})
+
+
+
+
+
