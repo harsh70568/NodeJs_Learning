@@ -1,0 +1,27 @@
+// Core Modules -> It provides more functionality to us, It makes our work easier.
+
+// Synchronous -> Requests wait until previous have been completed.
+// Asynchronous -> Multiple requests can be handled at the same time.
+
+// importing modules
+const fs = require('fs');
+
+// creating a new file
+fs.writeFileSync('read.text', "Welcome to my channel");
+
+// if the files do exists, it overrides the data
+fs.writeFileSync("read.text","Welcome only")
+
+// adding more data to existing data
+fs.appendFileSync('read.text', "!");
+
+// reading data
+const data = fs.readFileSync('read.text');
+org_data = data.toString();
+console.log(org_data);
+
+// rename a file
+fs.renameSync('read.text','read.txt');
+
+
+
