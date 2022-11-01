@@ -1,0 +1,37 @@
+// Challenge
+// 1. Create a folder and name it Harshc
+// 2. Create a file in it and name bio.txt and add data to it.
+// 3. Add more data into the file at the end of the existing data
+// 4. Read the data without buffer
+// 5. Rename the file to mybio.txt
+// 6. now delete both the file and the folder
+
+
+const fs = require('fs');
+
+// creating a folder
+fs.mkdirSync("harshc");
+
+// Creating a file and adding data to it.
+fs.writeFileSync("harshc/bio.txt", "My name is Harsh Jain ");
+
+// Adding more data into the file
+fs.appendFileSync("harshc/bio.txt", "I am pursuing B.Tech");
+
+// Reading the data
+const buf_data = fs.readFileSync("harshc/bio.txt");
+org_data = buf_data.toString();
+console.log(org_data);
+
+// Renaming the file
+fs.renameSync("harshc/bio.txt", "harshc/mybio.txt");
+
+// Deleting file
+fs.unlinkSync("harshc/mybio.txt");
+
+// Deletign folder
+fs.rmdirSync("harshc");
+
+
+
+
