@@ -1,0 +1,15 @@
+// importing http module to create server
+const http = require('http');
+
+
+// The req object can be used to get information about the current HTTP request.
+const server = http.createServer( (req, res) => {
+    res.end("Hello from the server side :)");
+
+});
+
+// Listening to the server
+server.listen(8000, "127.0.0.1", () => {
+    console.log("Listening to the port number 8000");
+});
+
