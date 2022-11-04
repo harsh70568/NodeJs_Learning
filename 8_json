@@ -1,0 +1,41 @@
+// stringify -> used to convert object into JSON
+// parse -> used to convert JSON to object
+
+const bioData = {
+    name : "vinod",
+    age : 12,
+    channel: "hiharsh"
+};
+
+// console.log(bioData.age);
+// console.log(bioData.channel);
+
+// // converting oobject to JSON
+// const jsonData = JSON.stringify(bioData);
+// console.log(jsonData);
+
+
+// // converting back JSON into object
+// const objData = JSON.parse(jsonData);
+// console.log(objData);
+
+
+// 1. convert to JSON
+// 2. dusre file m add krdena
+// 3. readFile
+// 4. again convert back to js object
+// 5. console.log
+
+const jsonData = JSON.stringify(bioData);
+
+const fs = require("fs");
+
+fs.writeFile("json1.json", jsonData,(err) => {
+    console.log("Created and added")
+})
+
+fs.readFile("json1.json", "UTF-8", (err, data) => {
+    const org_data = JSON.parse(data);
+    console.log(org_data);
+})
+
