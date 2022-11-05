@@ -1,0 +1,22 @@
+// imorting express module
+const express = require("express");
+const app = express();
+
+// routing
+app.get("/", (req, res) =>{
+    res.send("Hello from the express");
+});
+
+app.get("/about", (req, res) =>{
+    res.send("Hello from the about page");
+})
+
+app.get("/contact", (req, res) =>{
+    res.send("Hello from the contact page");
+})
+
+// Listening to the server
+app.listen(8000, () =>{
+    console.log("listening to the server at port number 8000")
+})
+
