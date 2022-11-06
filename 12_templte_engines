@@ -1,0 +1,26 @@
+// template engines -> they are used to add dynamic content, pub, ejs, hbs
+
+// we will be using handlebars i.e. hbs.
+
+//  {{channelName}} -> used to add dynamic content
+
+const express = require("express");
+const app = express();
+const path = require('path');
+
+
+//const staticPath = path.join("__dirnane", "../public");
+
+// to set the view engine
+app.set("view engine", "hbs");
+
+//app.use(express.static(staticPath));
+
+app.get("/", (req, res) =>{
+    res.render("index");
+});
+
+// Listening to the server
+app.listen(8000, () =>{
+    console.log("Listening");
+})
