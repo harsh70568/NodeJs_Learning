@@ -1,0 +1,25 @@
+//  {{channelName}} -> used to add dynamic content
+
+const express = require("express");
+const app = express();
+const path = require('path');
+
+
+//const staticPath = path.join("__dirnane", "../public");
+const tempPath = path.join(__dirname, "../templates");
+
+// to set the view engine
+app.set("view engine", "hbs");
+// customizing views name
+app.set("views", tempPath);
+
+//app.use(express.static(staticPath));
+
+app.get("/", (req, res) =>{
+    res.render("index");
+});
+
+// Listening to the server
+app.listen(8000, () =>{
+    console.log("Listening");
+})
