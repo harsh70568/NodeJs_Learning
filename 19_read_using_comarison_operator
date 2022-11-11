@@ -1,0 +1,57 @@
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/ttchannel", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => console.log("Commected sucessfully"))
+    .catch((err) => console.log(err));
+
+const schema_struct = new mongoose.Schema({
+    college_name: String,
+    total_students: Number,
+    location: String,
+    active: Boolean
+})
+
+// create collection
+const kiet = new mongoose.model("kiet", schema_struct);
+
+// creating and inserting multiple documents
+
+const createDocument = async () => {
+    try {
+        const first = new kiet({
+            college_name: "KIET",
+            total_students: 5000,
+            location: "Muradnagar",
+            active: true
+        })
+
+        const second = new kiet({
+            college_name: "ABES",
+            total_students: 5000,
+            location: "Ghaziabad",
+            active: true
+        })
+        const result = await kiet.insertMany([first, second]);
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// createDocument();
+// const getDocument = async () =>{
+//     const result = await kiet.find({total_students : {$gte : 5000}}).select({college_name:1});
+//     console.log(result);
+// }
+
+const getDocument = async () =>{
+    const res = await kiet.find({location : {$in : ["Ghaziabad", "Muradnagar"]}}).select({college_name:1});
+    console.log(res);
+}
+
+getDocument();
+
+
