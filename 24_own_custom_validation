@@ -1,0 +1,107 @@
+const mongoose = require("mongoose");
+
+// creating and connecting to the database
+mongoose.connect("mongodb://127.0.0.1:27017/family", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex : true
+})
+    .then(() => console.log("Connected sucessfully"))
+    .catch((err) => { console.log(err) });
+
+// collection structure
+const struct = new mongoose.Schema({
+    // builtin validation
+    fathers_name: {
+        type : String,
+        required : true,
+        uppercase : true,
+        trim : true,
+        minlength : 2,
+        maxlength : 30
+    },
+    mothers_name: String,
+    first_child: {
+        type : String,
+        required : true,
+        lowercase : true,
+        enum : ["harsh jain", "athrava jain", "khushi jain", "jhalak jain"]
+
+    },
+    second_child: String,
+    total: {
+        type: Number,
+        // custom validation
+        validate(value){
+            if(value < 0)
+            {
+                throw new Error("Count cannot be negative");
+            }
+        }
+    },
+    active: Boolean
+})
+
+// creating collection
+const sub_family = new mongoose.model("sub_family", struct);
+
+// creating documents
+
+const createDocument = async () => {
+    try {
+        const sanjay = new sub_family({
+            fathers_name: "SANJAy Jain",
+            mothers_name: "Shivani jain",
+            first_child: "harsh jain",
+            second_child: "athrava jain",
+            total: 4,
+            active: true
+        })
+
+        const rinku = new sub_family({
+            fathers_name: "RINku Jain",
+            mothers_name: "Anu jain",
+            first_child: "khushi jain",
+            second_child: "jhalak jain",
+            total: 5,
+            active: true
+        })
+
+        const res = await sub_family.insertMany([sanjay, rinku]);
+        console.log(res);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+createDocument();
+
+//reading documents
+
+const readDocument =  async () =>{
+    const res = await sub_family.find({total : {$gte : 4}}).select({fathers_name : 1})
+    console.log(res);
+}
+
+//readDocument();
+
+// update document
+const updateDocument = async (_id) => {
+    try{
+    const res = await sub_family.findByIdAndUpdate({_id}, {$set : {total: 5}});
+    console.log(res);
+    }catch(err) {
+        console.log(err);
+    }
+
+}
+
+//updateDocument("636f54eca9c47faf45dc78b0");
+
+// deleteDocument
+
+const deleteDocument = async (_id) =>{
+    const res = await sub_family.findByIdAndDelete({_id});
+    console.log(res);
+}
+//deleteDocument("636f54eca9c47faf45dc78b0")
